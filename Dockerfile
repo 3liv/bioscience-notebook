@@ -31,6 +31,7 @@ RUN conda install --quiet --yes \
     'scipy=*' \
     'xlrd=*'\
     'curl=*' \
+    'biom-format=*' \ 
     'bioconductor-biocinstaller=*' \
     'bioconductor-microbiome=*' \
     'bioconductor-deseq2=*'
