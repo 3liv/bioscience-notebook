@@ -14,6 +14,7 @@ RUN apt-get update && \
     tzdata \
     gfortran \
     libudunits2-dev \
+    libcairo2-dev \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -21,7 +22,8 @@ USER $NB_UID
 ENV TAR="/bin/tar"
 
 RUN conda config --add channels r && \
-    conda config --add channels bioconda 
+    conda config --add channels bioconda  && \
+    conda config --add channels etetoolkit
 
 RUN conda install --quiet --yes \  
     'numpy=1.15*' \
@@ -31,10 +33,11 @@ RUN conda install --quiet --yes \
     'scipy=*' \
     'xlrd=*'\
     'curl=*' \
+    'h5py=*' \
     'biom-format=*' \ 
     'bioconductor-biocinstaller=*' \
     'bioconductor-microbiome=*' \
-    'bioconductor-deseq2=*'
+    'bioconductor-deseq2=*' 
 
 # R packages
 RUN conda install --quiet --yes  -c r \
@@ -59,16 +62,20 @@ RUN conda install --quiet --yes  -c r \
     'r-wgcna=*' \
     'r-sp=*' \
     'r-spdep=*' \
+    'r-ggplot2=*' \
+    'r-gdtools=*' \
     'rpy2==*' 
 
+RUN conda install --quiet --yes -c etetoolkit  ete3
 
-RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone
+RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone missingno phylotoast
     
 RUN conda clean -tipsy && \
     fix-permissions $CONDA_DIR
 
 
 RUN Rscript -e "install.packages('https://cran.r-project.org/src/contrib/adegraphics_1.0-15.tar.gz', repos = NULL, method = 'libcurl')"
-RUN Rscript -e "install.packages('adespatial', repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages(c('adespatial', 'metacoder', 'ape', 'entrooy', 'diablo', 'VennDiagram', 'venneuler', 'caret', 'SNFtool'), repos = 'http://cran.us.r-project.org')"
 RUN Rscript -e "library(devtools); install_github('umerijaz/microbiomeSeq')"
+RUN Rscript -e "library(devtools); install_github('microsud/microbiomeutilities')"
 
