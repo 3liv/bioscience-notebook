@@ -1,4 +1,4 @@
-#bioscience-notebook
+# bioscience-notebook
 ## Docker container for doing biological data science with Python and R in Jupyter
 
 Build the image
