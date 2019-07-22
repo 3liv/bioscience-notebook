@@ -15,6 +15,8 @@ RUN apt-get update && \
     gfortran \
     libudunits2-dev \
     libcairo2-dev \
+    libmagick++-dev \
+    libmagickwand-dev \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -24,6 +26,8 @@ ENV TAR="/bin/tar"
 RUN conda config --add channels r && \
     conda config --add channels bioconda  && \
     conda config --add channels etetoolkit
+
+RUN conda install --quiet --yes libmagic=* libiconv
 
 RUN conda install --quiet --yes \  
     'numpy=1.15*' \
@@ -41,7 +45,7 @@ RUN conda install --quiet --yes \
 
 # R packages
 RUN conda install --quiet --yes  -c r \
-    'r-base=3.5.*' \
+    'r-base=3.*' \
     'r-irkernel=*' \
     'r-plyr=*' \
     'r-devtools=*' \
@@ -62,9 +66,12 @@ RUN conda install --quiet --yes  -c r \
     'r-wgcna=*' \
     'r-sp=*' \
     'r-spdep=*' \
+    'r-mixomics=*' \
     'r-ggplot2=*' \
     'r-gdtools=*' \
     'rpy2==*' 
+
+RUN conda install --quiet --yes -c bioconda r-phytools
 
 RUN conda install --quiet --yes -c etetoolkit  ete3
 
@@ -75,7 +82,8 @@ RUN conda clean -tipsy && \
 
 
 RUN Rscript -e "install.packages('https://cran.r-project.org/src/contrib/adegraphics_1.0-15.tar.gz', repos = NULL, method = 'libcurl')"
-RUN Rscript -e "install.packages(c('adespatial', 'metacoder', 'ape', 'entrooy', 'diablo', 'VennDiagram', 'venneuler', 'caret', 'SNFtool'), repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages(c('adespatial'), repos = 'http://cran.us.r-project.org')"
 RUN Rscript -e "library(devtools); install_github('umerijaz/microbiomeSeq')"
 RUN Rscript -e "library(devtools); install_github('microsud/microbiomeutilities')"
+RUN Rscript -e "install.packages(c('adespatial', 'metacoder', 'ape', 'VennDiagram', 'venneuler', 'caret', 'SNFtool'), repos = 'http://cran.us.r-project.org')"
 
