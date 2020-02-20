@@ -3,7 +3,7 @@
 ARG BASE_CONTAINER=jupyter/minimal-notebook
 FROM $BASE_CONTAINER
 
-LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
+LABEL maintainer="Ali Versi <aliversi@gmail.com>"
 
 USER root
 
@@ -22,12 +22,16 @@ RUN conda config --add channels r && \
     conda config --add channels bioconda 
 
 RUN conda install --quiet --yes \  
+    'conda-build' \
     'numpy==1.15*' \
     'matplotlib==*' \
     'pandas==*' \
+    'seaborn==*' \
+    'scipy==*' \
     'xlrd==*' \
     'bioconductor-biocinstaller==*' \
-    'bioconductor-microbiome==*'
+    'bioconductor-microbiome==*' \
+    'mgkit'
 
 # R packages
 RUN conda install --quiet --yes  -c r \
@@ -51,9 +55,9 @@ RUN conda install --quiet --yes  -c r \
     'r-hexbin=*' \
     'rpy2==*' 
 
-
-RUN pip install simplegeneric
+RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone
+RUN pip install humann2
     
-RUN conda clean -tipsy && \
+RUN conda build purge-all  && \
     fix-permissions $CONDA_DIR
 
