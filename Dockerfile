@@ -87,6 +87,8 @@ RUN conda install --quiet --yes -c etetoolkit  ete3
 RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone missingno phylotoast
 RUN pip install humann2
 
+RUN conda install --quiet --yes -c biobakery kneaddata graphlan
+
 RUN conda install --quiet --yes -c intel cython scikit-learn=0.21.3 xgboost
 
 RUN conda build purge-all  && \
@@ -99,4 +101,5 @@ RUN Rscript -e "install.packages(c('entropy', 'vegan', 'mclust', 'Venneuler', 'p
 RUN Rscript -e "install.packages(c('metacoder', 'ape', 'VennDiagram', 'venneuler', 'caret', 'SNFtool'), repos = 'http://cran.us.r-project.org')"
 RUN Rscript --verbose -e "library(devtools); options(unzip = 'internal'); install_github('umerijaz/microbiomeSeq', verbose = TRUE)"
 RUN Rscript --verbose -e "library(devtools); options(unzip = 'internal'); install_github('microsud/microbiomeutilities', verbose = TRUE)"
+RUN Rscript --verbose -e "library(devtools); options(unzip = 'internal'); install_bitbucket('biobakery/maaslin2@default', verbose = TRUE, ref = 'tip')"
 
