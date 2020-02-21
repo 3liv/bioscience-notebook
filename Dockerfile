@@ -33,20 +33,22 @@ RUN conda config --add channels r && \
 RUN conda install --quiet --yes libmagic=* libiconv
 
 RUN conda install --quiet --yes \  
-    'numpy=1.15*' \
-    'matplotlib=*' \
-    'pandas=*' \
-    'seaborn=*' \
-    'scipy=*' \
-    'xlrd=*'\
+    'conda-build' \
+    'numpy==1.15*' \
+    'matplotlib==*' \
+    'pandas==*' \
+    'seaborn==*' \
+    'scipy==*' \
+    'xlrd==*' \
     'curl=*' \
     'h5py=*' 
 
 RUN conda install --quiet --yes \  
     'biom-format=*' \ 
-    'bioconductor-biocinstaller=*' \
-    'bioconductor-microbiome=*' \
-    'bioconductor-deseq2=*' 
+    'bioconductor-biocinstaller==*' \
+    'bioconductor-microbiome==*' \
+    'bioconductor-deseq2=*' \
+    'mgkit'
 
 # R packages
 RUN conda install --quiet --yes  -c r \
@@ -79,17 +81,15 @@ RUN conda install --quiet --yes  -c r \
 
 
 RUN conda install --quiet --yes -c bioconda metaphlan2
-#RUN conda install --quiet --yes -c bioconda r-phytools
 
 RUN conda install --quiet --yes -c etetoolkit  ete3
 
-#RUN conda install --quiet --yes -c biobakery hclust2
-
 RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone missingno phylotoast
+RUN pip install humann2
 
 RUN conda install --quiet --yes -c intel cython scikit-learn=0.21.3 xgboost
-    
-RUN conda clean -tipsy && \
+
+RUN conda build purge-all  && \
     fix-permissions $CONDA_DIR
 
 
