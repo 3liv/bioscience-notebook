@@ -85,8 +85,7 @@ RUN conda install --quiet --yes -c bioconda metaphlan2
 RUN conda install --quiet --yes -c etetoolkit  ete3
 
 RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone missingno phylotoast
-RUN pip install humann2
-RUN pip install kneaddata
+RUN pip install humann2 kneaddata
 
 RUN conda install --quiet --yes -c intel cython scikit-learn=0.21.3 xgboost
 
