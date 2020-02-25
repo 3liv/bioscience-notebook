@@ -101,3 +101,4 @@ RUN Rscript --verbose -e "library(devtools); options(unzip = 'internal'); instal
 RUN Rscript --verbose -e "library(devtools); options(unzip = 'internal'); install_github('microsud/microbiomeutilities', verbose = TRUE)"
 RUN Rscript --verbose -e "library(devtools); options(unzip = 'internal'); install_bitbucket('biobakery/maaslin2@default', verbose = TRUE, ref = 'tip')"
 
+RUN wget -O graphlan https://bitbucket.org/nsegata/graphlan/get/1.1.3.zip; unzip graphlan
