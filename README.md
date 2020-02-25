@@ -11,3 +11,5 @@ Push the image
 ```bash
 docker push 3liv/bioscience-notebook:latest
 ```
+
+github actionas enabled to automatically build docker image
