@@ -80,7 +80,7 @@ RUN conda install --quiet --yes  -c r \
     'rpy2==*' 
 
 
-RUN conda install --quiet --yes -c bioconda metaphlan2
+RUN conda install --quiet --yes -c bioconda metaphlan2 trimmomatic 
 
 RUN conda install --quiet --yes -c etetoolkit  ete3
 
