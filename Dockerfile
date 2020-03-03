@@ -30,7 +30,7 @@ RUN conda config --add channels r && \
     conda config --add channels bioconda  && \
     conda config --add channels etetoolkit
 
-RUN conda install --quiet --yes libmagic=* libiconv
+RUN conda install --quiet --yes libmagic libiconv
 
 RUN conda install --quiet --yes \  
     'conda-build' \
