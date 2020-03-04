@@ -30,10 +30,10 @@ RUN conda config --add channels r && \
     conda config --add channels bioconda  && \
     conda config --add channels etetoolkit
 
-RUN conda install --quiet --yes libmagic 
-RUN conda install --quiet --yes libiconv
+RUN conda install --quiet --yes -vv libmagic 
+RUN conda install --quiet --yes -vv libiconv
 
-RUN conda install --quiet --yes \  
+RUN conda install --quiet --yes -vv \  
     'conda-build' \
     'numpy==1.15*' \
     'matplotlib==*' \
@@ -44,7 +44,7 @@ RUN conda install --quiet --yes \
     'curl=*' \
     'h5py=*' 
 
-RUN conda install --quiet --yes \  
+RUN conda install --quiet --yes -vv \  
     'biom-format=*' \ 
     'bioconductor-biocinstaller==*' \
     'bioconductor-microbiome==*' \
@@ -52,7 +52,7 @@ RUN conda install --quiet --yes \
     'mgkit'
 
 # R packages
-RUN conda install --quiet --yes  -c r \
+RUN conda install --quiet --yes  -vv -c r \
     'r-base=3.*' \
     'r-irkernel=*' \
     'r-plyr=*' \
@@ -81,14 +81,14 @@ RUN conda install --quiet --yes  -c r \
     'rpy2==*' 
 
 
-RUN conda install --quiet --yes -c bioconda metaphlan2
+RUN conda install --quiet --yes -vv -c bioconda metaphlan2
 
-RUN conda install --quiet --yes -c etetoolkit  ete3
+RUN conda install --quiet --yes -vv -c etetoolkit  ete3
 
 RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone missingno phylotoast
 RUN pip install humann2 kneaddata STAMP
 
-RUN conda install --quiet --yes -c intel cython scikit-learn=0.21.3 xgboost
+RUN conda install --quiet --yes -vv -c intel cython scikit-learn=0.21.3 xgboost
 
 RUN conda build purge-all  && \
     fix-permissions $CONDA_DIR
