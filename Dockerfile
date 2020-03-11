@@ -38,7 +38,7 @@ RUN conda install --quiet --yes -vv \
     'conda-build' \
     'numpy==1.15*' \
     'matplotlib==*' \
-    'pandas==*' \
+    'pandas<1.0' \
     'seaborn==*' \
     'scipy==*' \
     'xlrd==*' \
