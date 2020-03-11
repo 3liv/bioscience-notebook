@@ -20,6 +20,7 @@ RUN apt-get update && \
     libmagick++-dev \
     libmagickwand-dev \
     parallel \ 
+    ncbi-blast+ \
     gcc && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
