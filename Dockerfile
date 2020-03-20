@@ -83,6 +83,7 @@ RUN conda install --quiet --yes  -vv -c r \
 
 
 RUN conda install --quiet --yes -vv -c bioconda metaphlan2 trimmomatic
+RUN conda install --quiet --yes -vv -c bioconda kraken 
 RUN conda install --quiet --yes -vv -c bioconda seqtk
 
 RUN conda install --quiet --yes -vv -c etetoolkit  ete3
