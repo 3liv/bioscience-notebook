@@ -83,15 +83,14 @@ RUN conda install --quiet --yes  -vv -c r \
 
 
 RUN conda install --quiet --yes -vv -c bioconda metaphlan2 trimmomatic
-RUN conda install --quiet --yes -vv -c bioconda kraken2 
 RUN conda install --quiet --yes -vv -c bioconda seqtk
-
 RUN conda install --quiet --yes -vv -c etetoolkit  ete3
 
 RUN pip install simplegeneric numpy pandas scipy matplotlib seaborn scikit-bio xlrd tableone missingno phylotoast
 RUN pip install humann2 kneaddata 
 
 RUN conda install --quiet --yes -vv -c intel cython scikit-learn=0.21.3 xgboost
+RUN conda install --quiet --yes -vv -c bioconda kraken2 
 
 RUN conda build purge-all  && \
     fix-permissions $CONDA_DIR
